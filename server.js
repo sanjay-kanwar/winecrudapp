@@ -1,16 +1,19 @@
 var express = require('express');
 
+var path = require('path');
+var favicon = require('static-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+
+var	wine = require('./routes/wines');
 
 var app = express();
 
-app.get( '/wines', function(req,res){
-		res.send([{name:'wine1'}, {name:'wine2'}]);
+app.get('wines/:id', wine.findById);
 
-		});
 
-app.get('/wines/:id', function(req,res){
-res.send({id:req.params.id, name:"The Name", description:"description"});
-		});
 
 app.listen(3000);
 console.log("Listening to port 3000...");
